@@ -82,9 +82,8 @@ def cesta_k_vod_C3_ADku():
     modr_C3_A1_l___C4_8D3 = gps_sensor_in6.x == -86 and gps_sensor_in6.y == -1
     modr_C3_A1_l___C4_8D4 = gps_sensor_in6.x == -127 and gps_sensor_in6.y == -42
     modr_C3_A1_l___C4_8D5 = gps_sensor_in6.x == -127 and gps_sensor_in6.y == -84
-    
-modr_C3_A1_r___C4_8D1 = gps_sensor_in6.x == 127 and gps_sensor_in6.y == 84
-modr_C3_A1_r___C4_8D2 = gps_sensor_in6.x == 127 and gps_sensor_in6.y == 42
-modr_C3_A1_r___C4_8D3 = gps_sensor_in6.x == 127 and gps_sensor_in6.y == 1
-modr_C3_A1_r___C4_8D4 = gps_sensor_in6.x == 127 and gps_sensor_in6.y == 1
-modr_C3_A1_r___C4_8D5 = gps_sensor_in6.x == -40 and gps_sensor_in6.y == -42
+    modr_C3_A1_r___C4_8D1 = gps_sensor_in6.x == 127 and gps_sensor_in6.y == 84
+    modr_C3_A1_r___C4_8D2 = gps_sensor_in6.x == 127 and gps_sensor_in6.y == 42
+    modr_C3_A1_r___C4_8D3 = gps_sensor_in6.x == 127 and gps_sensor_in6.y == 1
+    modr_C3_A1_r___C4_8D4 = gps_sensor_in6.x == 127 and gps_sensor_in6.y == 1
+    modr_C3_A1_r___C4_8D5 = gps_sensor_in6.x == -40 and gps_sensor_in6.y == -42
