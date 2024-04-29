@@ -1,0 +1,63 @@
+#!/usr/bin/env python3
+
+# Import the necessary libraries
+import time
+import math
+from ev3dev2.motor import *
+from ev3dev2.sound import Sound
+from ev3dev2.button import Button
+from ev3dev2.sensor import *
+from ev3dev2.sensor.lego import *
+from ev3dev2.sensor.virtual import *
+
+# Create the sensors and motors objects
+motorA = LargeMotor(OUTPUT_A)
+motorB = LargeMotor(OUTPUT_B)
+left_motor = motorA
+right_motor = motorB
+tank_drive = MoveTank(OUTPUT_A, OUTPUT_B)
+steering_drive = MoveSteering(OUTPUT_A, OUTPUT_B)
+
+spkr = Sound()
+btn = Button()
+radio = Radio()
+color_sensor_in1 = ColorSensor(INPUT_1)
+ultrasonic_sensor_in2 = UltrasonicSensor(INPUT_2)
+ultrasonic_sensor_in3 = UltrasonicSensor(INPUT_3)
+ultrasonic_sensor_in4 = UltrasonicSensor(INPUT_4)
+gyro_sensor_in5 = GyroSensor(INPUT_5)
+gps_sensor_in6 = GPSSensor(INPUT_6)
+
+motorC = LargeMotor(OUTPUT_C) # Magnet
+
+# Here is where your code starts
+
+# Define the target coordinates
+target_x = 63
+target_y = 63
+
+# Define the speed and angle of the robot
+speed = 50
+angle = 0
+
+# Define the function to move the robot to the target coordinates
+def move_to_coordinates(x, y):
+    # Get the current position of the robot
+    current_x, current_y = gps_sensor_in6.x, gps_sensor_in6.y
+    # Calculate the distance and angle to the target coordinates
+    distance = math.sqrt((x - current_x)**2 + (y - current_y)**2)
+    angle = math.atan2(y - current_y, x - current_x)
+
+    # Rotate the robot to face the target coordinates
+    gyro_sensor_in5.reset()
+    left_motor.run_to_abs_pos(speed=speed, position=angle - gyro_sensor_in5.angle, stop_action="brake")
+
+    # Move the robot towards the target coordinates
+    left_motor.run_to_abs_pos(speed=speed, position=left_motor.position + distance, stop_action="brake")
+
+    # Stop the motors
+    left_motor.stop(stop_action="brake")
+    right_motor.stop(stop_action="brake")
+
+# Call the function to move the robot to the target coordinates
+move_to_coordinates(target_x, target_y)
